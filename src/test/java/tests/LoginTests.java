@@ -1,5 +1,6 @@
 package tests;
 
+import models.User;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -25,6 +26,17 @@ public class LoginTests extends TestBase {
 
         app.getHelperUser().submitLogin();
 
+        Assert.assertTrue(app.getHelperUser().isSignOutPresent());
+
+    }
+
+    @Test
+    public void loginSuccessModel(){
+        User user = new User().withEmail("esimakova1984@gmail.com").withPassword("Tcbvfrjdf1$");
+        app.getHelperUser().openLoginRegistrationForm();
+        app.getHelperUser().fillLoginRegistartionForm(user);
+        app.getHelperUser().submitLogin();
+        Assert.assertTrue(app.getHelperUser().isSignOutPresent());
 
     }
     @Test
@@ -37,12 +49,8 @@ public class LoginTests extends TestBase {
         app.getHelperUser().fillLoginRegistartionForm("esimakova1984@gmail.com","Tcbvfrjdf1$");
 
         app.getHelperUser().submitLogin();
-
-
-    }
-    @AfterMethod
-    public void postCondition(){
         Assert.assertTrue(app.getHelperUser().isSignOutPresent());
+
     }
 
 

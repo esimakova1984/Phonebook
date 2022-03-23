@@ -1,9 +1,13 @@
 package manager;
 
+import models.User;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class HelperUser extends HelperBase{
+public class HelperUser extends HelperBase {
 
     public HelperUser(WebDriver wd) {
         super(wd);
@@ -15,8 +19,14 @@ public class HelperUser extends HelperBase{
 
 
     public void fillLoginRegistartionForm(String email, String password) {
-        type(By.xpath("//input[1]"),email);
-        type(By.xpath("//input[2]"),password);
+        type(By.xpath("//input[1]"), email);
+        type(By.xpath("//input[2]"), password);
+
+    }
+
+    public void fillLoginRegistartionForm(User user) {
+        type(By.xpath("//input[1]"), user.getEmail());
+        type(By.xpath("//input[2]"), user.getPassword());
 
     }
 
@@ -34,5 +44,17 @@ public class HelperUser extends HelperBase{
 
     public void signOut() {
         click(By.xpath("//*[text()='Sign Out']"));
+    }
+
+
+    public void alertWindow() {
+        Alert alert = new WebDriverWait(wd, 5).until(ExpectedConditions.alertIsPresent());
+        alert.accept();
+    }
+
+    public boolean isErrorTextDisplayed() {
+        Boolean errorText = new WebDriverWait(wd, 5)
+                .until(ExpectedConditions.textToBePresentInElement(wd.findElement(By.xpath("//*[text()='Registration failed with code 400']")), "Registration failed with code 400"));
+        return errorText;
     }
 }
