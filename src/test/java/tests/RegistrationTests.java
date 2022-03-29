@@ -11,7 +11,7 @@ public class RegistrationTests extends TestBase {
 
     @BeforeMethod
     public void preCondition() {
-        if (app.getHelperUser().isSignOutPresent()) {
+        if (app.getHelperUser().isLoginRegistartionSuccess()) {
             app.getHelperUser().signOut();
         }
     }
@@ -24,7 +24,7 @@ public class RegistrationTests extends TestBase {
         app.getHelperUser().fillLoginRegistartionForm("esimakov" + index + "@gmail.com", "Tcbv123$");
         app.getHelperUser().submitRegistrtion();
 
-        Assert.assertTrue(app.getHelperUser().isSignOutPresent());
+        Assert.assertTrue(app.getHelperUser().isLoginRegistartionSuccess());
     }
 
     @Test
@@ -34,7 +34,7 @@ public class RegistrationTests extends TestBase {
         app.getHelperUser().openLoginRegistrationForm();
         app.getHelperUser().fillLoginRegistartionForm(user);
         app.getHelperUser().submitRegistrtion();
-        Assert.assertTrue(app.getHelperUser().isSignOutPresent());
+        Assert.assertTrue(app.getHelperUser().isLoginRegistartionSuccess());
     }
 
     @Test
@@ -57,7 +57,7 @@ public class RegistrationTests extends TestBase {
         app.getHelperUser().fillLoginRegistartionForm("esimakov" + index + "@gmail.com", "Tcbv123$");
         app.getHelperUser().submitRegistrtion();
 
-        Assert.assertTrue(app.getHelperUser().isSignOutPresent());
+        Assert.assertTrue(app.getHelperUser().isLoginRegistartionSuccess());
     }
 
 

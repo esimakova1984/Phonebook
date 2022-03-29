@@ -34,7 +34,7 @@ public class HelperUser extends HelperBase {
         click(By.xpath("//*[text()=' Login']"));
     }
 
-    public boolean isSignOutPresent() {
+    public boolean isLoginRegistartionSuccess() {
         return isElementPresent(By.xpath("//*[text()='Sign Out']"));
     }
 
@@ -56,5 +56,32 @@ public class HelperUser extends HelperBase {
         Boolean errorText = new WebDriverWait(wd, 5)
                 .until(ExpectedConditions.textToBePresentInElement(wd.findElement(By.xpath("//*[text()='Registration failed with code 400']")), "Registration failed with code 400"));
         return errorText;
+    }
+
+    public boolean isAlertDispalyed() {
+       Alert alert = new WebDriverWait(wd,5).until(ExpectedConditions.alertIsPresent());
+       if(alert == null){
+           return false;
+       }else{
+           return true;
+       }
+    }
+
+    public boolean isErrorWrongFormat() {
+        Alert alert = new WebDriverWait(wd,5).until(ExpectedConditions.alertIsPresent());
+        wd.switchTo().alert();
+        String  error = alert.getText();//get text from alert
+
+        alert.accept();// OK
+        //        alert.dismiss();//cansel
+//        alert.sendKeys("Hello"); // if alert has ttext place
+        return error.contains("Wrong email or password format");
+    }
+
+    public void login(User user){
+        click(By.cssSelector("[href='/login']"));
+        type(By.xpath("//input[1]"), user.getEmail());
+        type(By.xpath("//input[2]"), user.getPassword());
+        click(By.xpath("//*[text()=' Login']"));
     }
 }
