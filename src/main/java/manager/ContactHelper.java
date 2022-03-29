@@ -26,5 +26,11 @@ public class ContactHelper extends HelperBase{
     }
 
 
+    public void saveForm() {
+        click(By.cssSelector("div[class='add_form__2rsm2'] button"));
+    }
 
+    public boolean isNewContactAddedSuccess() {
+        return isElementPresent(By.cssSelector(".contact-page_leftdiv__yhyke"));
+    }
 }

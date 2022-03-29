@@ -19,16 +19,19 @@ public class AddNewContact extends TestBase{
 
     @Test
     public void addNewContactSuccess(){
+        int index = (int) (System.currentTimeMillis() / 1000) % 3600;
         Contact contact = Contact.builder()
                 .name("Katya")
-                .lastName("Sim")
-                .phone("12345678")
-                .email("a@gmail.com")
+                .lastName("Sim"+index)
+                .phone("12345678"+index)
+                .email("a"+index+"@gmail.com")
                 .address("Ashkelon")
                 .description("friends")
                 .build();
 
         app.getContact().openContactForm();
         app.getContact().fillContactForm(contact);
+        app.getContact().saveForm();
+        Assert.assertTrue(app.getContact().isNewContactAddedSuccess());
     }
 }
